@@ -1,5 +1,6 @@
 import { ReactNode, useEffect } from "react";
 import BottomNav from "@/components/navigation/BottomNav";
+import TierSwitcher from "@/components/TierSwitcher";
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -28,7 +29,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <div className="size-7 rounded-md bg-gradient-primary shadow-[var(--shadow-elevated)] transition-transform group-hover:scale-110" />
             <span className="text-sm font-semibold tracking-tight">AI Campus</span>
           </a>
-          <a href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">Pricing</a>
+          <div className="flex items-center gap-3">
+            <a href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">Pricing</a>
+            <TierSwitcher />
+          </div>
         </div>
       </header>
       <main className="mx-auto mb-24 max-w-screen-lg px-6 py-8">

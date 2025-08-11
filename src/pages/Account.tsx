@@ -2,10 +2,10 @@ import AppLayout from "@/layouts/AppLayout";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { getTier } from "@/state/tier";
+import { useTier } from "@/state/tier";
 
 export default function Account() {
-  const tier = getTier();
+  const [tier] = useTier();
   return (
     <AppLayout>
       <SEO title="Account – AI Campus" description="Manage your profile, portfolio and subscription tier." />

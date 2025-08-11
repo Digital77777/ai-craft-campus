@@ -2,8 +2,8 @@ import AppLayout from "@/layouts/AppLayout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SEO } from "@/components/SEO";
-import { useEffect, useState } from "react";
-import { getTier, setTier, Tier } from "@/state/tier";
+import TierSwitcher from "@/components/TierSwitcher";
+import { useTier } from "@/state/tier";
 
 const features = [
   { title: "Learn", desc: "Structured paths from zero to job-ready." },
@@ -11,32 +11,9 @@ const features = [
   { title: "Earn", desc: "Portfolio hosting and marketplace micro‑gigs." },
 ];
 
-const TierToggle = () => {
-  const [tier, update] = useState<Tier>(getTier());
-  useEffect(() => update(getTier()), []);
-  return (
-    <div className="flex flex-wrap items-center gap-2 text-sm">
-      <span className="text-muted-foreground">Demo as:</span>
-      {(["Free", "Creator", "Career"] as Tier[]).map((t) => (
-        <Button
-          key={t}
-          size="pill"
-          variant={tier === t ? "hero" : "outline"}
-          onClick={() => {
-            setTier(t);
-            update(t);
-          }}
-          aria-pressed={tier === t}
-        >
-          {t}
-        </Button>
-      ))}
-    </div>
-  );
-};
 
 const Index = () => {
-  const tier = getTier();
+  const [tier] = useTier();
   return (
     <AppLayout>
       <SEO
@@ -64,7 +41,7 @@ const Index = () => {
             </div>
             <div className="mt-4 flex items-center gap-2">
               <Badge variant="secondary">Current tier: {tier}</Badge>
-              <TierToggle />
+              <TierSwitcher />
             </div>
           </div>
           <div className="relative w-full max-w-sm md:max-w-md">

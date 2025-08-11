@@ -2,13 +2,13 @@ import AppLayout from "@/layouts/AppLayout";
 import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
-import { getTier } from "@/state/tier";
+import { useMemo, useState } from "react";
+import { useTier } from "@/state/tier";
 import { toast } from "@/hooks/use-toast";
 
 export default function Tools() {
-  const tier = getTier();
-  const limit = tier === "Free" ? 20 : 1000;
+  const [tier] = useTier();
+  const limit = useMemo(() => (tier === "Free" ? 20 : 1000), [tier]);
   const [used, setUsed] = useState(0);
   const [prompt, setPrompt] = useState("");
 
