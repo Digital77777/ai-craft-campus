@@ -1,12 +1,14 @@
 import { ReactNode, useEffect } from "react";
 import BottomNav from "@/components/navigation/BottomNav";
 import TierSwitcher from "@/components/TierSwitcher";
+import { useTier } from "@/state/tier";
 
 interface AppLayoutProps {
   children: ReactNode;
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
+  const [tier] = useTier();
   // Signature moment: ambient spotlight reacting to cursor (respects reduced motion)
   useEffect(() => {
     const handle = (e: MouseEvent) => {
@@ -19,6 +21,11 @@ const AppLayout = ({ children }: AppLayoutProps) => {
     if (mq.matches) window.addEventListener("pointermove", handle);
     return () => window.removeEventListener("pointermove", handle);
   }, []);
+
+  // Reflect current tier in a data attribute for CSS theming
+  useEffect(() => {
+    document.documentElement.setAttribute("data-tier", tier);
+  }, [tier]);
 
   return (
     <div className="min-h-dvh bg-gradient-subtle">

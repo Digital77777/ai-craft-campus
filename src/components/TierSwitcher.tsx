@@ -12,6 +12,7 @@ export default function TierSwitcher() {
           key={t}
           size="pill"
           variant={tier === t ? "hero" : "outline"}
+          className={tier === t ? undefined : t === "Free" ? "chip-outline-free" : t === "Creator" ? "chip-outline-creator" : "chip-outline-career"}
           onClick={() => setTier(t)}
           aria-pressed={tier === t}
         >

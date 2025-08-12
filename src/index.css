@@ -55,6 +55,28 @@ All colors MUST be HSL. */
     --shadow-elevated: 0 20px 40px -12px hsl(var(--primary) / 0.35);
     --shadow-soft: 0 8px 24px -6px hsl(var(--foreground) / 0.08);
     --transition-smooth: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Tier color tokens */
+    --tier-free: 214 90% 60%;
+    --tier-free-alt: 198 93% 60%;
+    --tier-creator: 258 90% 66%;
+    --tier-creator-alt: 292 76% 64%;
+    --tier-career: 142 70% 45%;
+    --tier-career-alt: 171 66% 45%;
+  }
+
+  /* Tier theming overrides */
+  html[data-tier="Free"] {
+    --primary: var(--tier-free);
+    --primary-variant: var(--tier-free-alt);
+  }
+  html[data-tier="Creator"] {
+    --primary: var(--tier-creator);
+    --primary-variant: var(--tier-creator-alt);
+  }
+  html[data-tier="Career"] {
+    --primary: var(--tier-career);
+    --primary-variant: var(--tier-career-alt);
   }
 
   .dark {
@@ -110,4 +132,17 @@ All colors MUST be HSL. */
   .bg-gradient-primary { background-image: var(--gradient-primary); }
   .bg-gradient-subtle { background-image: var(--gradient-subtle); }
   .ambient-spotlight { position: fixed; inset: 0; pointer-events: none; background-image: var(--gradient-surface); filter: blur(50px); z-index: 0; }
+
+  /* Tier utility classes */
+  .tier-card-free { border-color: hsl(var(--tier-free)); }
+  .tier-card-creator { border-color: hsl(var(--tier-creator)); }
+  .tier-card-career { border-color: hsl(var(--tier-career)); }
+
+  .badge-tier-free { background-color: hsl(var(--tier-free) / 0.12); border-color: hsl(var(--tier-free) / 0.4); color: hsl(var(--foreground)); }
+  .badge-tier-creator { background-color: hsl(var(--tier-creator) / 0.12); border-color: hsl(var(--tier-creator) / 0.4); color: hsl(var(--foreground)); }
+  .badge-tier-career { background-color: hsl(var(--tier-career) / 0.12); border-color: hsl(var(--tier-career) / 0.4); color: hsl(var(--foreground)); }
+
+  .chip-outline-free { color: hsl(var(--tier-free)); border-color: hsl(var(--tier-free) / 0.5); }
+  .chip-outline-creator { color: hsl(var(--tier-creator)); border-color: hsl(var(--tier-creator) / 0.5); }
+  .chip-outline-career { color: hsl(var(--tier-career)); border-color: hsl(var(--tier-career) / 0.5); }
 }

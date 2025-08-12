@@ -40,7 +40,7 @@ const Index = () => {
               </Button>
             </div>
             <div className="mt-4 flex items-center gap-2">
-              <Badge variant="secondary">Current tier: {tier}</Badge>
+              <Badge variant="secondary" className={tier === "Free" ? "badge-tier-free" : tier === "Creator" ? "badge-tier-creator" : "badge-tier-career"}>Current tier: {tier}</Badge>
               <TierSwitcher />
             </div>
           </div>

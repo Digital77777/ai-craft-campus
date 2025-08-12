@@ -50,7 +50,7 @@ export default function Pricing() {
 
       <section className="grid gap-4 md:grid-cols-3">
         {tiers.map((t) => (
-          <Card key={t.name} className={t.highlighted ? "border-primary" : undefined}>
+          <Card key={t.name} className={`${t.highlighted ? "border-primary" : ""} ${t.name === "Free" ? "tier-card-free" : t.name === "Creator" ? "tier-card-creator" : "tier-card-career"}`}>
             <CardHeader>
               <CardTitle className="flex items-baseline justify-between">
                 <span>{t.name}</span>

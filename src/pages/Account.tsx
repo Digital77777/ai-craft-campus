@@ -17,7 +17,7 @@ export default function Account() {
       <section className="rounded-xl border p-6">
         <div className="flex items-center gap-3">
           <span>Current tier</span>
-          <Badge variant="secondary">{tier}</Badge>
+          <Badge variant="secondary" className={tier === "Free" ? "badge-tier-free" : tier === "Creator" ? "badge-tier-creator" : "badge-tier-career"}>{tier}</Badge>
         </div>
         <p className="mt-2 text-muted-foreground">
           Upgrade to Creator for unlimited AI tools and marketplace access. Career adds mentorship and certificates.
