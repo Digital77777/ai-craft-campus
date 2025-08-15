@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SEO } from "@/components/SEO";
 import TierSwitcher from "@/components/TierSwitcher";
 import { useTier } from "@/state/tier";
+import { useAuth } from "@/hooks/useAuth";
 import { Sparkles, Rocket, Crown, Users, Briefcase, Award, Code, BookOpen, TrendingUp } from "lucide-react";
 
 const heroFeatures = [
@@ -68,6 +69,7 @@ const stats = [
 
 const Index = () => {
   const [tier] = useTier();
+  const { user } = useAuth();
   
   return (
     <AppLayout>
@@ -94,7 +96,9 @@ const Index = () => {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Button asChild size="lg" variant="hero" className="px-8 py-6 text-lg">
-                <a href="/learning">Start Free Today</a>
+                <a href={user ? "/learning" : "/auth"}>
+                  {user ? "Continue Learning" : "Start Free Today"}
+                </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="px-8 py-6 text-lg">
                 <a href="#tiers">See What's Possible</a>
@@ -198,16 +202,29 @@ const Index = () => {
           </p>
           
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" variant="hero">
-              <a href="/learning">Explore Learning</a>
-            </Button>
-            <Button asChild size="lg" variant="secondary">
-              <a href="/tools">Try AI Tools</a>
-            </Button>
-            {tier !== "Career" && (
-              <Button asChild size="lg" variant="outline">
-                <a href="/pricing">Upgrade Now</a>
-              </Button>
+            {user ? (
+              <>
+                <Button asChild size="lg" variant="hero">
+                  <a href="/learning">Explore Learning</a>
+                </Button>
+                <Button asChild size="lg" variant="secondary">
+                  <a href="/tools">Try AI Tools</a>
+                </Button>
+                {tier !== "Career" && (
+                  <Button asChild size="lg" variant="outline">
+                    <a href="/pricing">Upgrade Now</a>
+                  </Button>
+                )}
+              </>
+            ) : (
+              <>
+                <Button asChild size="lg" variant="hero">
+                  <a href="/auth">Get Started</a>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <a href="/pricing">View Pricing</a>
+                </Button>
+              </>
             )}
           </div>
         </div>

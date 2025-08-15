@@ -2,6 +2,8 @@ import { ReactNode, useEffect } from "react";
 import BottomNav from "@/components/navigation/BottomNav";
 import TierSwitcher from "@/components/TierSwitcher";
 import { useTier } from "@/state/tier";
+import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/ui/button";
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -9,6 +11,7 @@ interface AppLayoutProps {
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   const [tier] = useTier();
+  const { user, signOut } = useAuth();
   // Signature moment: ambient spotlight reacting to cursor (respects reduced motion)
   useEffect(() => {
     const handle = (e: MouseEvent) => {
@@ -38,7 +41,21 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           </a>
           <div className="flex items-center gap-3">
             <a href="/pricing" className="text-sm text-muted-foreground hover:text-foreground">Pricing</a>
-            <TierSwitcher />
+            {user ? (
+              <>
+                <span className="text-sm text-muted-foreground">
+                  {user.email}
+                </span>
+                <TierSwitcher />
+                <Button variant="outline" size="sm" onClick={signOut}>
+                  Sign Out
+                </Button>
+              </>
+            ) : (
+              <Button asChild variant="outline" size="sm">
+                <a href="/auth">Sign In</a>
+              </Button>
+            )}
           </div>
         </div>
       </header>
